@@ -16,6 +16,7 @@ function PizzaBlock({ title, price, types, imageUrl, sizes }) {
           {types.map((elem, index) => {
             return (
               <li
+                key={elem}
                 onClick={() => setStatusThickness(index)}
                 className={statusThickness === index ? "active" : ""}
               >
@@ -27,7 +28,7 @@ function PizzaBlock({ title, price, types, imageUrl, sizes }) {
         <ul>
           {sizes.map((elem, index) => {
             return (
-              <li
+              <li key={elem}
                 onClick={() => setStatusSizes(index)}
                 className={statusSizes === index ? "active" : ""}
               >
