@@ -11,10 +11,6 @@ function Categories() {
   ];
   let [indexOfCategories, setIndexOfCategories] = useState(0);
 
-  const chooseСategory = (indx) => {
-    setIndexOfCategories(indx);
-  };
-
   return (
     <div className="categories">
       <ul>
@@ -22,7 +18,7 @@ function Categories() {
           return (
             <li
               key={val}
-              onClick={() => chooseСategory(indx)}
+              onClick={() => setIndexOfCategories(indx)}
               className={indexOfCategories === indx ? "active" : ""}
             >
               {val}
