@@ -8,7 +8,7 @@ import Sort from "../Sort";
 import PizzaBlock from "../PizzaBlock/index";
 import Skeleton from "../PizzaBlock/Skeleton";
 
-export const Home = () => {
+export const Home = ({searchValue}) => {
 
     const [productList, setProductList] = useState([]);
   const [isLoading, setIsLoading] = useState(true)
@@ -18,23 +18,23 @@ export const Home = () => {
     sortProperty: 'rating'
   });
 
-  // const urlDb = `https://648850e00e2469c038fd750f.mockapi.io/pizza?category=${categorieId}`;
-  const urlDb = `https://648850e00e2469c038fd750f.mockapi.io/pizza?${categorieId > 0 ? `category=${categorieId}`: ''}&sortBy=${sort.sortProperty}&order=desc`
+  
   useEffect(() => {
     setIsLoading(true)
 
     const sortBy = sort.sortProperty.replace('-', '');
     const order = sort.sortProperty.includes('-') ? 'asc': 'desc';
     const category = categorieId > 0 ? `category=${categorieId}`: '';
+    const search  = searchValue ? `&search=${searchValue}`: '';
 
-    fetch(`https://648850e00e2469c038fd750f.mockapi.io/pizza?${category}&sortBy=${sortBy}&order=${order}`)
+    fetch(`https://648850e00e2469c038fd750f.mockapi.io/pizza?${category}&sortBy=${sortBy}&order=${order}${search}`)
     .then((res) => res.json())
     .then((res) => {
       setProductList(res)
       setIsLoading(false)
     });
     window.scrollTo(0, 0)
-  }, [categorieId, sort])
+  }, [categorieId, sort, searchValue])
 
     return (
       <div className="container">
