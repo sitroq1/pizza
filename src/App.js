@@ -1,9 +1,9 @@
 import "./scss/app.scss";
 import React from "react";
 import Header from "./components/Header";
-import Home from "./components/Pages/Home";
-import NotFoundPage from './components/Pages/NotFoundPage'
-import Cart from "./components/Pages/Cart";
+import Home from "./Pages/Home";
+import NotFoundPage from './Pages/NotFoundPage'
+import Cart from "./Pages/Cart";
 import { Route, Routes } from "react-router-dom";
 import { useState } from "react";
 

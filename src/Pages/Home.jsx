@@ -3,12 +3,12 @@
 import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 
-import Categories from "../Categories";
-import Sort from "../Sort";
-import PizzaBlock from "../PizzaBlock/index";
-import Skeleton from "../PizzaBlock/Skeleton";
+import Categories from "../components/Categories";
+import Sort from "../components/Sort";
+import PizzaBlock from "../components/PizzaBlock/index";
+import Skeleton from "../components/PizzaBlock/Skeleton";
 import Pagination from "./Pagination";
-import { searchContext } from "../../App";
+import { searchContext } from "../App";
 
 
 export const Home = () => {
