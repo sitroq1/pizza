@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 
 
-
+import configureStore from './redux/store'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
