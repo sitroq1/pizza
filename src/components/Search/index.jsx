@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import styles from "./Search.module.scss";
+import { searchContext } from "../../App";
 
-export default function Search({ searchValue, setSearchValue }) {
+
+
+export default function Search() {
+
+const {searchValue, setSearchValue} = useContext(searchContext)
+
   return (
     <>
       <div className={styles.root}>

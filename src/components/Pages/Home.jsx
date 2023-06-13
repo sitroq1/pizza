@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 
-import React from "react";
+import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 
 import Categories from "../Categories";
@@ -8,9 +8,10 @@ import Sort from "../Sort";
 import PizzaBlock from "../PizzaBlock/index";
 import Skeleton from "../PizzaBlock/Skeleton";
 import Pagination from "./Pagination";
+import { searchContext } from "../../App";
 
 
-export const Home = ({ searchValue }) => {
+export const Home = () => {
   const [productList, setProductList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   let [categorieId, setCategorieId] = useState(0);
@@ -19,6 +20,7 @@ export const Home = ({ searchValue }) => {
     name: "популярности",
     sortProperty: "rating",
   });
+  const { searchValue } = useContext(searchContext)
 
   useEffect(() => {
     setIsLoading(true);

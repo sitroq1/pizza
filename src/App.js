@@ -1,4 +1,5 @@
 import "./scss/app.scss";
+import React from "react";
 import Header from "./components/Header";
 import Home from "./components/Pages/Home";
 import NotFoundPage from './components/Pages/NotFoundPage'
@@ -8,18 +9,19 @@ import { useState } from "react";
 
 
 
-
+export const searchContext = React.createContext();
 function App() {
 
   const [searchValue, setSearchValue] = useState('');
 
   console.log(searchValue)
-
+  
 
  
   return (
     <div className="wrapper">
-      <Header searchValue={searchValue} setSearchValue={setSearchValue}/>
+      <searchContext.Provider value={{searchValue, setSearchValue}}>
+      <Header />
       <div className="content">
         
           <Routes>
@@ -34,6 +36,7 @@ function App() {
           
         
       </div>
+      </searchContext.Provider>
     </div>
   );
 }
