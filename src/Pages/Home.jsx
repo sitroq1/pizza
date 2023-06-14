@@ -15,7 +15,8 @@ import { setCategorieId } from "../redux/slices/filterSlice";
 
 export const Home = () => {
   const dispatch = useDispatch();
-  const categoryId = useSelector((state) => state.filterReducer.categoryId)
+  const { categoryId, sort } = useSelector((state) => state.filterReducer)
+
   console.log("categoryId", categoryId)
   
   const onClickCategory = (id) => {
@@ -26,12 +27,7 @@ export const Home = () => {
 
   const [productList, setProductList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  // let [categorieId, setCategorieId] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [sort, setSort] = useState({
-    name: "популярности",
-    sortProperty: "rating",
-  });
   const { searchValue } = useContext(searchContext)
 
   useEffect(() => {
@@ -61,7 +57,7 @@ export const Home = () => {
           value={categoryId}
           onClickCategory={onClickCategory}
         />
-        <Sort value={sort} onSelectSort={(i) => setSort(i)} />
+        <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
