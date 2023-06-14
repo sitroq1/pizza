@@ -9,12 +9,24 @@ import PizzaBlock from "../components/PizzaBlock/index";
 import Skeleton from "../components/PizzaBlock/Skeleton";
 import Pagination from "./Pagination";
 import { searchContext } from "../App";
+import { useSelector, useDispatch } from "react-redux";
+import { setCategorieId } from "../redux/slices/filterSlice";
 
 
 export const Home = () => {
+  const dispatch = useDispatch();
+  const categoryId = useSelector((state) => state.filterReducer.categoryId)
+  console.log("categoryId", categoryId)
+  
+  const onClickCategory = (id) => {
+    console.log("onClickCategory", id)
+    dispatch(setCategorieId(id))
+  }
+
+
   const [productList, setProductList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  let [categorieId, setCategorieId] = useState(0);
+  // let [categorieId, setCategorieId] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [sort, setSort] = useState({
     name: "популярности",
@@ -27,7 +39,7 @@ export const Home = () => {
 
     const sortBy = sort.sortProperty.replace("-", "");
     const order = sort.sortProperty.includes("-") ? "asc" : "desc";
-    const category = categorieId > 0 ? `category=${categorieId}` : "";
+    const category = categoryId > 0 ? `category=${categoryId}` : "";
     const search = searchValue ? `&search=${searchValue}` : "";
     
 
@@ -40,14 +52,14 @@ export const Home = () => {
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
-  }, [categorieId, sort, searchValue, currentPage]);
+  }, [categoryId, sort, searchValue, currentPage]);
 
   return (
     <div className="container">
       <div className="content__top">
         <Categories
-          value={categorieId}
-          onClickCategory={(indx) => setCategorieId(indx)}
+          value={categoryId}
+          onClickCategory={onClickCategory}
         />
         <Sort value={sort} onSelectSort={(i) => setSort(i)} />
       </div>
