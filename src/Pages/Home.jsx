@@ -2,7 +2,7 @@
 
 import React, { useContext } from "react";
 import { useState, useEffect } from "react";
-
+import axios from "axios";
 import Categories from "../components/Categories";
 import Sort from "../components/Sort";
 import PizzaBlock from "../components/PizzaBlock/index";
@@ -39,14 +39,20 @@ export const Home = () => {
     const search = searchValue ? `&search=${searchValue}` : "";
     
 
-    fetch(
-      `https://648850e00e2469c038fd750f.mockapi.io/pizza?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
-    )
-      .then((res) => res.json())
+    // fetch(
+    //   `https://648850e00e2469c038fd750f.mockapi.io/pizza?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
+    // )
+    //   .then((res) => res.json())
+    //   .then((res) => {
+    //     setProductList(res);
+    //     setIsLoading(false);
+    //   });
+    axios.get(`https://648850e00e2469c038fd750f.mockapi.io/pizza?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`)
       .then((res) => {
-        setProductList(res);
+        setProductList(res.data);
         setIsLoading(false);
-      });
+      })
+
     window.scrollTo(0, 0);
   }, [categoryId, sort, searchValue, currentPage]);
 
