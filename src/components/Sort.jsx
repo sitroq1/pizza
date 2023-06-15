@@ -2,7 +2,15 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setSort } from "../redux/slices/filterSlice";
 
+export const sortList = [
+  {name: 'популярности (DESC)', sortProperty: 'rating'},
+  {name: 'популярности (ASC)', sortProperty: '-rating'},
+  {name: 'цене (DESC)', sortProperty: 'price'},
+  {name: 'цене (ASC)', sortProperty: '-price'},
+  {name: 'алфавиту (DESC)', sortProperty: 'title'},
+  {name: 'алфавиту (ASC)', sortProperty: '-title'}
 
+]
 
 function Sort() {
   const dispatch = useDispatch();
@@ -12,15 +20,7 @@ function Sort() {
     setIsOpenSort(!isOpenSort)
   }
 
-  const sortList = [
-    {name: 'популярности (DESC)', sortProperty: 'rating'},
-    {name: 'популярности (ASC)', sortProperty: '-rating'},
-    {name: 'цене (DESC)', sortProperty: 'price'},
-    {name: 'цене (ASC)', sortProperty: '-price'},
-    {name: 'алфавиту (DESC)', sortProperty: 'title'},
-    {name: 'алфавиту (ASC)', sortProperty: '-title'}
 
-  ]
 let [isOpenSort, setIsOpenSort] = useState(false);
   return (
     <div className="sort">
