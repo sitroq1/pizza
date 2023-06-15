@@ -10,12 +10,13 @@ import Skeleton from "../components/PizzaBlock/Skeleton";
 import Pagination from "./Pagination";
 import { searchContext } from "../App";
 import { useSelector, useDispatch } from "react-redux";
-import { setCategorieId } from "../redux/slices/filterSlice";
+import { setCategorieId, setCurrentPage } from "../redux/slices/filterSlice";
+import qs from 'qs';
 
 
 export const Home = () => {
   const dispatch = useDispatch();
-  const { categoryId, sort } = useSelector((state) => state.filterReducer)
+  const { categoryId, sort, currentPage } = useSelector((state) => state.filterReducer)
 
   console.log("categoryId", categoryId)
   
@@ -23,12 +24,15 @@ export const Home = () => {
     console.log("onClickCategory", id)
     dispatch(setCategorieId(id))
   }
+  const onChangePage = (num) => {
+    dispatch(setCurrentPage(num))
+  }
 
 
   const [productList, setProductList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-  const { searchValue } = useContext(searchContext)
+  const { searchValue } = useContext(searchContext);
+
 
   useEffect(() => {
     setIsLoading(true);
@@ -76,7 +80,7 @@ export const Home = () => {
               return <PizzaBlock key={obj.id} {...obj} />;
             })}
       </div>
-      <Pagination onChangePage={(number) => setCurrentPage(number)}/>
+      <Pagination currentPage={currentPage} onChangePage={onChangePage}/>
     </div>
   );
 };
